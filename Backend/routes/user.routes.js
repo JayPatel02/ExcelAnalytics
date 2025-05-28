@@ -22,7 +22,7 @@ router.post('/login', [
     userController.login
 );
 
-// User logout route
-router.get('/logout', authMiddleware.authUser,userController.logout) 
+router.post('/logout', authMiddleware.authUser, userController.logout);
+ 
 
 module.exports = router;

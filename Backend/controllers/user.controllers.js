@@ -60,8 +60,12 @@ module.exports.login = async (req, res,next) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 }
-
-module.exports.logout = async (req, res,next) => {
-    res.clearCookie('token');
-    res.status(200).json({message:"Logged out successfully"});
-}
+module.exports.logout = async (req, res, next) => {
+    try {
+        res.clearCookie('token'); 
+        res.status(200).json({ message: 'Logged out successfully' });
+    } catch (error) {
+        console.error('Error during logout:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};

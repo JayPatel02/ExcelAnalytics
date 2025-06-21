@@ -12,10 +12,15 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.7",
     "axios": "^1.9.0",
+    "chart.js": "^4.4.2",
     "react": "^19.1.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.1",
-    "tailwindcss": "^4.1.7"
+    "react-dropzone": "^14.2.3",
+    "xlsx": "^0.18.5",
+    "tailwindcss": "^4.1.7",
+    "lucide-react": "^0.460.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

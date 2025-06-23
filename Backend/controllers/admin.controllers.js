@@ -1,8 +1,6 @@
 const UserModel = require('../models/user.model');
 const ExcelModel = require('../models/excel.model');
-const { validationResult } = require('express-validator');
 
-// Get all users (admin only)
 const getAllUsers = async (req, res) => {
     try {
         const { limit = 50, skip = 0 } = req.query;
@@ -35,7 +33,6 @@ const getAllUsers = async (req, res) => {
     }
 };
 
-// Get specific user details with their Excel data
 const getUserDetails = async (req, res) => {
     try {
         const { userId } = req.params;
@@ -75,7 +72,6 @@ const deleteUser = async (req, res) => {
     try {
         const { userId } = req.params;
 
-        // Check if user exists
         const user = await UserModel.findById(userId);
         if (!user) {
             return res.status(404).json({
@@ -84,7 +80,6 @@ const deleteUser = async (req, res) => {
             });
         }
 
-        // Prevent admin from deleting themselves
         if (req.user._id.toString() === userId) {
             return res.status(400).json({
                 success: false,
@@ -92,10 +87,8 @@ const deleteUser = async (req, res) => {
             });
         }
 
-        // Delete user's Excel file first
         await ExcelModel.deleteMany({ user: userId });
 
-        // Delete the user
         await UserModel.findByIdAndDelete(userId);
 
         res.status(200).json({
@@ -113,7 +106,6 @@ const deleteUser = async (req, res) => {
     }
 };
 
-// Get admin dashboard stats
 const getAdminDashboardStats = async (req, res) => {
     try {
         const thirtyDaysAgo = new Date();
@@ -136,7 +128,6 @@ const getAdminDashboardStats = async (req, res) => {
             UserModel.countDocuments({ createdAt: { $gte: thirtyDaysAgo } })
         ]);
 
-        // Get user role distribution
         const roleStats = await UserModel.aggregate([
             {
                 $group: {
@@ -175,7 +166,6 @@ const getAdminDashboardStats = async (req, res) => {
     }
 };
 
-// Get all Excel files from all users (admin only)
 const getAllExcelFiles = async (req, res) => {
     try {
         const { limit = 50, skip = 0 } = req.query;

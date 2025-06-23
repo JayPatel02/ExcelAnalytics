@@ -2,13 +2,11 @@ const ExcelModel = require('../models/excel.model');
 const { validationResult } = require('express-validator');
 const XLSX = require('xlsx');
 
-// Upload single Excel file
 const uploadSingleExcel = async (req, res) => {
     try {
         const userId = req.user._id;
         const fileName = req.file ? req.file.originalname : undefined;
 
-        // Check if file is present
         if (!req.file) {
             return res.status(400).json({
                 success: false,
@@ -16,7 +14,6 @@ const uploadSingleExcel = async (req, res) => {
             });
         }
 
-        // Parse Excel file buffer
         let jsonData = [];
         let sheetName = '';
         try {
@@ -31,7 +28,6 @@ const uploadSingleExcel = async (req, res) => {
             });
         }
 
-        // Validate fileName and jsonData
         const errors = [];
         if (!fileName) errors.push({ msg: 'File name is required' });
         if (!jsonData || !Array.isArray(jsonData) || jsonData.length === 0) errors.push({ msg: 'Excel data is required' });
@@ -44,7 +40,6 @@ const uploadSingleExcel = async (req, res) => {
             });
         }
 
-        // Upsert: update if exists, otherwise insert
         const updatedFile = await ExcelModel.findOneAndUpdate(
             { user: userId, fileName },
             {
@@ -78,7 +73,6 @@ const uploadSingleExcel = async (req, res) => {
     }
 };
 
-// Get user's Excel file (single file per user)
 const getUserExcelFile = async (req, res) => {
     try {
         const userId = req.user._id;
@@ -108,8 +102,6 @@ const getUserExcelFile = async (req, res) => {
         });
     }
 };
-
-// Get Excel data for chart creation (sends full data to frontend)
 const getExcelDataForCharts = async (req, res) => {
     try {
         const userId = req.user._id;
@@ -144,7 +136,6 @@ const getExcelDataForCharts = async (req, res) => {
     }
 };
 
-// Get specific Excel file by ID
 const getExcelFileById = async (req, res) => {
     try {
         const { fileId } = req.params;
@@ -174,7 +165,6 @@ const getExcelFileById = async (req, res) => {
     }
 };
 
-// Delete Excel file
 const deleteExcelFile = async (req, res) => {
     try {
         const { fileId } = req.params;
@@ -203,7 +193,6 @@ const deleteExcelFile = async (req, res) => {
     }
 };
 
-// Get user dashboard stats
 const getUserDashboardStats = async (req, res) => {
     try {
         const userId = req.user._id;
@@ -230,7 +219,6 @@ const getUserDashboardStats = async (req, res) => {
     }
 };
 
-// Get user's upload history
 const getUserUploadHistory = async (req, res) => {
     try {
         const userId = req.user._id;

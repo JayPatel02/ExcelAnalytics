@@ -34,7 +34,6 @@ module.exports.register = async (req, res, next) => {
         await newUser.save();
         const token = newUser.generateAuthToken();
 
-        // Remove password from response
         const userResponse = {
             _id: newUser._id,
             name: newUser.name,
@@ -95,7 +94,6 @@ module.exports.login = async (req, res, next) => {
             maxAge: 24 * 60 * 60 * 1000 // 24 hours
         });
 
-        // Remove password from response
         const userResponse = {
             _id: user._id,
             name: user.name,

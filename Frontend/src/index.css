@@ -1,0 +1,86 @@
+@import 'tailwindcss';
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-slate-50 text-slate-900;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-slate-200 hover:bg-slate-300 text-slate-800 font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md border border-slate-200 p-6;
+  }
+  
+  .input-field {
+    @apply w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+  }
+  
+  .form-label {
+    @apply block text-sm font-medium text-slate-700 mb-2;
+  }
+
+  /* AI Summary markdown renderer */
+  .ai-markdown {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #475569;
+  }
+  .ai-markdown h1,
+  .ai-markdown h2,
+  .ai-markdown h3,
+  .ai-markdown h4 {
+    color: #4c1d95;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
+  }
+  .ai-markdown h1 { font-size: 1.05rem; }
+  .ai-markdown h2 { font-size: 0.95rem; }
+  .ai-markdown h3 { font-size: 0.9rem; }
+  .ai-markdown p {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+  .ai-markdown strong {
+    color: #5b21b6;
+    font-weight: 600;
+  }
+  .ai-markdown ul,
+  .ai-markdown ol {
+    padding-left: 1.25rem;
+    margin: 0.35rem 0;
+  }
+  .ai-markdown li {
+    margin: 0.2rem 0;
+  }
+  .ai-markdown code {
+    background: #ede9fe;
+    color: #5b21b6;
+    border-radius: 0.25rem;
+    padding: 0.1rem 0.35rem;
+    font-size: 0.8rem;
+    font-family: ui-monospace, monospace;
+  }
+  .ai-markdown hr {
+    border-color: #ddd6fe;
+    margin: 0.75rem 0;
+  }
+}
+
